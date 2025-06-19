@@ -21,10 +21,16 @@ const Login = () => {
         })
       });
       const data = await res.json();
+      if(data.error === 'Invalid credentials')
+      {
+        alert(data.error);
+      }
+      else {
       console.log("token",data.token);
       localStorage.setItem('token', data.token);
       alert("Login Successful");
       navigate('/');
+      }
     } catch (err) {
       alert('Login failed: ' + (err.response?.data?.error || 'Something went wrong'));
     }
